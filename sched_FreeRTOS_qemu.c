@@ -14,11 +14,12 @@
 #include "diag/Trace.h"
 
 
-TaskHandle_t xHandle1 = NULL, xHandle2 = NULL, xHandle3 = NULL;
+TaskHandle_t xHandle1 = NULL, xHandle2 = NULL, xHandle3 = NULL , xHandle4 = NULL;
 
 
 void vBlink(void *pvParam){
-  trace_printf("%s\n", pcTaskGetName(NULL));
+  trace_printf("%s ", pcTaskGetName(NULL));
+  trace_printf("Tick: %d \n" , xTaskGetTickCount());
   BSP_LED_Toggle((uint32_t)pvParam);
 } // vBlink
 
