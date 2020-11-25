@@ -16,9 +16,9 @@
 
 TaskHandle_t xHandle1 = NULL, xHandle2 = NULL, xHandle3 = NULL , xHandle4 = NULL;
 uint16_t usPhase_1 = 10, usPhase_2 = 260, usPhase_3 = 135; // Task's phase in ms.
-uint16_t usPeriod1 = 250, usPeriod2 = 200 , usPeriod3 = 500; // Task's period in ms.
+uint16_t usPeriod1 = 200, usPeriod2 = 250 , usPeriod3 = 500; // Task's period in ms.
 uint16_t usWCET1 = 1, usWCET2 = 1, usWCET3 = 1; // Task's worst-case of execution in ms.
-uint16_t usDL1 = 250, usDL2 = 200, usDL3 = 500; // Task's deadline in ms.
+uint16_t usDL1 = 200, usDL2 = 250, usDL3 = 500; // Task's deadline in ms.
 
 
 
@@ -40,6 +40,8 @@ void main(void){
   BSP_LED_Init(LED5);
   BSP_LED_Init(LED6);
   vSchedulerInit();
+
+
 
   /*
    * Criação das tarefas periódicas:
