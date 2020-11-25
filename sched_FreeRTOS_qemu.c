@@ -15,13 +15,15 @@
 
 
 TaskHandle_t xHandle1 = NULL, xHandle2 = NULL, xHandle3 = NULL , xHandle4 = NULL;
-int phase_1 = 10, phase_2 = 260, phase_3 = 135; // Phase of tasks in ms.
+uint16_t usPhase_1 = 10, usPhase_2 = 260, usPhase_3 = 135; // Task's phase in ms.
+uint16_t usPeriod1 = 10, usPeriod2 = 260, usPeriod3 = 135; // Task's period in ms.
+
 
 
 void vBlink(void *pvParam){
   trace_printf("%s ", pcTaskGetName(NULL));
   trace_printf("Tick: %d \n" , xTaskGetTickCount());
-  BSP_LED_Toggle((uint32_t)pvParam);
+  BSP_LED_Toggle((uint32_t) pvParam);
 } // vBlink
 
 void vPrioInfo(void *pvParam){
@@ -43,9 +45,38 @@ void main(void){
    *  */
 
 
-  vSchedulerPeriodicTaskCreate(vBlink, "Task1", configMINIMAL_STACK_SIZE, (void *)LED3, 1, &xHandle1, pdMS_TO_TICKS(phase_1), pdMS_TO_TICKS(250), pdMS_TO_TICKS(001), pdMS_TO_TICKS(250));
-  vSchedulerPeriodicTaskCreate(vBlink, "Task2", configMINIMAL_STACK_SIZE, (void *)LED6, 1, &xHandle2, pdMS_TO_TICKS(phase_2), pdMS_TO_TICKS(250), pdMS_TO_TICKS(001), pdMS_TO_TICKS(250));
-  vSchedulerPeriodicTaskCreate(vBlink, "Task3", configMINIMAL_STACK_SIZE, (void *)LED5, 1, &xHandle3, pdMS_TO_TICKS(phase_3), pdMS_TO_TICKS(500), pdMS_TO_TICKS(001), pdMS_TO_TICKS(500));
+  vSchedulerPeriodicTaskCreate(
+		  vBlink,
+		  "Task1",
+		  configMINIMAL_STACK_SIZE,
+		  (void *)LED3,
+		  1,
+		  &xHandle1,
+		  pdMS_TO_TICKS(usPhase_1),
+		  pdMS_TO_TICKS(usPeriod1),
+		  pdMS_TO_TICKS(001),
+		  pdMS_TO_TICKS(250));
+
+  vSchedulerPeriodicTaskCreate(vBlink,
+		  "Task2",
+		  configMINIMAL_STACK_SIZE,
+		  (void *)LED6,
+		  1,
+		  &xHandle2,
+		  pdMS_TO_TICKS(usPhase_2),
+		  pdMS_TO_TICKS(usPeriod2),
+		  pdMS_TO_TICKS(001),
+		  pdMS_TO_TICKS(250));
+  vSchedulerPeriodicTaskCreate(vBlink,
+		  "Task3",
+		  configMINIMAL_STACK_SIZE,
+		  (void *)LED5,
+		  1,
+		  &xHandle3,
+		  pdMS_TO_TICKS(usPhase_3),
+		  pdMS_TO_TICKS(usPeriod3),
+		  pdMS_TO_TICKS(001),
+		  pdMS_TO_TICKS(500));
 
   /*
    * Criação das tarefas aperiódicas:
