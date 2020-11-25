@@ -23,6 +23,11 @@ void vBlink(void *pvParam){
   BSP_LED_Toggle((uint32_t)pvParam);
 } // vBlink
 
+void vPrioInfo(void *pvParam){
+  trace_printf("Priorities:\n%s: %d\n", pcTaskGetName(xHandle1), uxTaskPriorityGet(xHandle1));
+  trace_printf("%s: %d\n", pcTaskGetName(xHandle2), uxTaskPriorityGet(xHandle2));
+  trace_printf("%s: %d\n\n", pcTaskGetName(xHandle3), uxTaskPriorityGet(xHandle3));
+} // vPrioInfo
 
 void main(void){
   __HAL_RCC_GPIOD_CLK_ENABLE();
